@@ -145,7 +145,7 @@ namespace SubSonic.DataProviders
 
             DbCommand cmd = scope.Connection.CreateCommand();
             cmd.Connection = scope.Connection; //CreateConnection();
-
+						cmd.CommandTimeout = qry.CommandTimeout;
             cmd.CommandText = qry.CommandSql;
             cmd.CommandType = qry.CommandType;
 
@@ -179,6 +179,7 @@ namespace SubSonic.DataProviders
             DbCommand cmd = Factory.CreateCommand();
             cmd.CommandText = qry.CommandSql;
             cmd.CommandType = qry.CommandType;
+						cmd.CommandTimeout = qry.CommandTimeout;
             DataSet ds = new DataSet();
 
             using(AutomaticConnectionScope scope = new AutomaticConnectionScope(this))
@@ -203,6 +204,7 @@ namespace SubSonic.DataProviders
                 DbCommand cmd = Factory.CreateCommand();
                 cmd.Connection = automaticConnectionScope.Connection;
                 cmd.CommandType = qry.CommandType;
+								cmd.CommandTimeout = qry.CommandTimeout;
                 cmd.CommandText = qry.CommandSql;
                 AddParams(cmd, qry);
                 result = cmd.ExecuteScalar();
@@ -241,6 +243,7 @@ namespace SubSonic.DataProviders
                 DbCommand cmd = automaticConnectionScope.Connection.CreateCommand();
                 cmd.CommandText = qry.CommandSql;
                 cmd.CommandType = qry.CommandType;
+								cmd.CommandTimeout = qry.CommandTimeout;
                 AddParams(cmd, qry);
                 result = cmd.ExecuteNonQuery();
                 // Issue 11 fix introduced by feroalien@hotmail.com
